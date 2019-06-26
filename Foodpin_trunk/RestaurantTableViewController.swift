@@ -59,6 +59,17 @@ class RestaurantTableViewController: UITableViewController {
         
         return cell
     }
+    override func tableView(_ tableview: UITableView, didSelectRowAt indexPath: IndexPath){
+        //建立選單作為動作清單
+        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
+        
+        // 加入動作至選單之中
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        optionMenu.addAction(cancelAction)
+        
+        //呈現選單
+        present(optionMenu, animated: true , completion: nil)
+    }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
