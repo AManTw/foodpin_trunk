@@ -25,6 +25,8 @@ class RestaurantTableViewController: UITableViewController {
     
     var restaurantTypes = ["Coffee & Tea Shop", "Cafe", "Tea House", "Austrian / Causual Drink", "French" ,
                            "Bakery", "Bakery", "Chocolate", "Cafe", "American / Seafood" ,"American", "American", "Breakfast & Brunch", "Coffee & Tea", "Coffee & Tea","Latin American", "Spanish", "Spanish", "Spanish", "Britsh", "Thai"]
+    var restaurantVisited = Array(repeating: false , count: 21)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,29 +59,49 @@ class RestaurantTableViewController: UITableViewController {
         cell.locationLabel.text = restaurantLocations[indexPath.row]
         cell.thumbnailImageView.image = UIImage(named: restaurantImage[indexPath.row] )
         
+        cell.accessoryType = restaurantVisited[indexPath.row] ? .checkmark : .none
+        
         return cell
     }
+    
     override func tableView(_ tableview: UITableView, didSelectRowAt indexPath: IndexPath){
         //建立選單作為動作清單
         let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
         
         // 加入動作至選單之中
+        let checkinAction = UIAlertAction(title: "Check in", style: .default, handler: {
+            (action:UIAlertAction!) -> Void in
+            
+            let cell =   tableview.cellForRow(at: indexPath)
+            cell?.accessoryType = .checkmark
+            self.restaurantVisited[indexPath.row] = true
+        })
+        optionMenu.addAction(checkinAction)
+
+        
+        let callActionHandler = { (action: UIAlertAction!) -> Void in
+            let alertMessage = UIAlertController(title: "Service Unavailable", message: "Sorry, the call feature is not available yet. Please retry later.", preferredStyle: .alert)
+            alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertMessage, animated: true, completion: nil)
+        }
+        let callAction = UIAlertAction(title: "Call "+"123-000-\(indexPath.row)", style: .default, handler: callActionHandler)
+        optionMenu.addAction(callAction)
+
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         optionMenu.addAction(cancelAction)
         
+
         //呈現選單
         present(optionMenu, animated: true , completion: nil)
+        
+        //取消列的選取
+        tableview.deselectRow(at: indexPath, animated: false)
     }
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
+    
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
