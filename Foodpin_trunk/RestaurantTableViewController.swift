@@ -77,8 +77,16 @@ class RestaurantTableViewController: UITableViewController {
             cell?.accessoryType = .checkmark
             self.restaurantVisited[indexPath.row] = true
         })
-        optionMenu.addAction(checkinAction)
+        //optionMenu.addAction(checkinAction)
 
+        let UncheckinAction = UIAlertAction(title: "UnCheck", style: .default, handler: {
+            (action:UIAlertAction!) -> Void in
+            
+            let cell =   tableview.cellForRow(at: indexPath)
+            cell?.accessoryType = .none
+            self.restaurantVisited[indexPath.row] = false
+        })
+        restaurantVisited[indexPath.row] ? optionMenu.addAction(UncheckinAction) : optionMenu.addAction(checkinAction)
         
         let callActionHandler = { (action: UIAlertAction!) -> Void in
             let alertMessage = UIAlertController(title: "Service Unavailable", message: "Sorry, the call feature is not available yet. Please retry later.", preferredStyle: .alert)
