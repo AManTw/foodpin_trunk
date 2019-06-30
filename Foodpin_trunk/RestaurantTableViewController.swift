@@ -92,6 +92,12 @@ class RestaurantTableViewController: UITableViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         optionMenu.addAction(cancelAction)
         
+        if let popoverController = optionMenu.popoverPresentationController {
+            if let cell = tableview.cellForRow(at: indexPath) {
+                popoverController.sourceView = cell
+                popoverController.sourceRect = cell.bounds
+            }
+        }
 
         //呈現選單
         present(optionMenu, animated: true , completion: nil)
