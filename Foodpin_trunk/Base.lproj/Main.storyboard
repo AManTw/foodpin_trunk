@@ -36,7 +36,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="kRe-oA-ukL">
-                                                    <rect key="frame" x="75" y="0.0" width="262" height="54.5"/>
+                                                    <rect key="frame" x="75" y="0.0" width="227" height="54.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FiQ-rj-1vg">
                                                             <rect key="frame" x="0.0" y="0.0" width="47" height="20.5"/>
@@ -58,7 +58,18 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hrh-D0-ger">
+                                                    <rect key="frame" x="317" y="0.0" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="Ars-89-xPZ"/>
+                                                        <constraint firstAttribute="height" constant="20" id="HHq-Mh-JPZ"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hrh-D0-ger" firstAttribute="trailing" secondItem="DSy-lP-LYG" secondAttribute="trailingMargin" id="fB8-RH-diW"/>
+                                                <constraint firstItem="hrh-D0-ger" firstAttribute="top" secondItem="DSy-lP-LYG" secondAttribute="topMargin" constant="2" id="tPX-or-GWb"/>
+                                            </constraints>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -69,6 +80,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="checkImageView" destination="hrh-D0-ger" id="jDp-4K-L7e"/>
                                     <outlet property="locationLabel" destination="arR-EC-Sxw" id="hbu-nm-3cb"/>
                                     <outlet property="nameLabel" destination="FiQ-rj-1vg" id="g3s-JF-Xqs"/>
                                     <outlet property="thumbnailImageView" destination="Fdo-AW-n85" id="w2L-Z7-R27"/>

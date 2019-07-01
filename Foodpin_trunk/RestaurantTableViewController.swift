@@ -59,8 +59,10 @@ class RestaurantTableViewController: UITableViewController {
         cell.typeLabel.text = restaurantTypes[indexPath.row]
         cell.locationLabel.text = restaurantLocations[indexPath.row]
         cell.thumbnailImageView.image = UIImage(named: restaurantImage[indexPath.row] )
+        cell.checkImageView.image = UIImage(named: "heart-tick")
         
-        cell.accessoryType = restaurantVisited[indexPath.row] ? .checkmark : .none
+        //cell.accessoryType = restaurantVisited[indexPath.row] ? .checkmark : .none
+        cell.checkImageView.isHidden = restaurantVisited[indexPath.row] ? false : true
         
         return cell
     }
@@ -70,23 +72,18 @@ class RestaurantTableViewController: UITableViewController {
         let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
         
         // 加入動作至選單之中
-        let checkinAction = UIAlertAction(title: "Check in", style: .default, handler: {
-            (action:UIAlertAction!) -> Void in
-            
-            let cell =   tableview.cellForRow(at: indexPath)
-            cell?.accessoryType = .checkmark
-            self.restaurantVisited[indexPath.row] = true
-        })
-        //optionMenu.addAction(checkinAction)
 
-        let UncheckinAction = UIAlertAction(title: "UnCheck", style: .default, handler: {
+        let checkTitle = (restaurantVisited[indexPath.row]) ? "UnCheck" : "Check in"
+        let checkinAction = UIAlertAction(title: checkTitle , style: .default, handler: {
             (action:UIAlertAction!) -> Void in
             
-            let cell =   tableview.cellForRow(at: indexPath)
-            cell?.accessoryType = .none
-            self.restaurantVisited[indexPath.row] = false
+            let cell =  tableview.cellForRow(at: indexPath) as! RestaurantTableViewCell
+            self.restaurantVisited[indexPath.row] = (self.restaurantVisited[indexPath.row]) ? false : true
+            
+            cell.checkImageView.isHidden = self.restaurantVisited[indexPath.row] ? false :true
+            
         })
-        restaurantVisited[indexPath.row] ? optionMenu.addAction(UncheckinAction) : optionMenu.addAction(checkinAction)
+        optionMenu.addAction(checkinAction)
         
         let callActionHandler = { (action: UIAlertAction!) -> Void in
             let alertMessage = UIAlertController(title: "Service Unavailable", message: "Sorry, the call feature is not available yet. Please retry later.", preferredStyle: .alert)
