@@ -67,7 +67,7 @@ class RestaurantTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableview: UITableView, didSelectRowAt indexPath: IndexPath){
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         //建立選單作為動作清單
         let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
         
@@ -77,7 +77,7 @@ class RestaurantTableViewController: UITableViewController {
         let checkinAction = UIAlertAction(title: checkTitle , style: .default, handler: {
             (action:UIAlertAction!) -> Void in
             
-            let cell =  tableview.cellForRow(at: indexPath) as! RestaurantTableViewCell
+            let cell =  tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
             self.restaurantVisited[indexPath.row] = (self.restaurantVisited[indexPath.row]) ? false : true
             
             cell.checkImageView.isHidden = self.restaurantVisited[indexPath.row] ? false :true
@@ -98,7 +98,7 @@ class RestaurantTableViewController: UITableViewController {
         optionMenu.addAction(cancelAction)
         
         if let popoverController = optionMenu.popoverPresentationController {
-            if let cell = tableview.cellForRow(at: indexPath) {
+            if let cell = tableView.cellForRow(at: indexPath) {
                 popoverController.sourceView = cell
                 popoverController.sourceRect = cell.bounds
             }
@@ -108,7 +108,7 @@ class RestaurantTableViewController: UITableViewController {
         present(optionMenu, animated: true , completion: nil)
         
         //取消列的選取
-        tableview.deselectRow(at: indexPath, animated: false)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -158,6 +158,31 @@ class RestaurantTableViewController: UITableViewController {
         return swipeConfiguration
     }
     
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?{
+        
+        let checkAction = UIContextualAction(style: .normal, title: "Check") {
+            (action, sourceView, completionHandler) in
+            
+            //let activityController : UIActivityViewController
+            
+            let cell =  tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
+            self.restaurantVisited[indexPath.row] = (self.restaurantVisited[indexPath.row]) ? false : true
+            cell.checkImageView.isHidden = self.restaurantVisited[indexPath.row] ? false :true
+            
+            //activityController = UIActivityViewController(activityItems: nil, applicationActivities: nil)
+            
+        
+            //self.present(activityController, animated: true, completion: nil)
+            completionHandler(true)
+            
+        }
+        
+        checkAction.backgroundColor = UIColor(red: 76.0/255.0, green: 231.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+        checkAction.image = restaurantVisited[indexPath.row] ? UIImage(named: "undo") : UIImage(named: "tick")
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [checkAction])
+        return swipeConfiguration
+    }
     
     /*
     // Override to support conditional editing of the table view.
