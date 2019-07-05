@@ -62,50 +62,6 @@ class RestaurantTableViewController: UITableViewController {
         return cell
     }
     
-   /* override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        //建立選單作為動作清單
-        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
-        
-        // 加入動作至選單之中
-
-        let checkTitle = (restaurantVisited[indexPath.row]) ? "UnCheck" : "Check in"
-        let checkinAction = UIAlertAction(title: checkTitle , style: .default, handler: {
-            (action:UIAlertAction!) -> Void in
-            
-            let cell =  tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
-            self.restaurantVisited[indexPath.row] = (self.restaurantVisited[indexPath.row]) ? false : true
-            
-            cell.checkImageView.isHidden = self.restaurantVisited[indexPath.row] ? false :true
-            
-        })
-        optionMenu.addAction(checkinAction)
-        
-        let callActionHandler = { (action: UIAlertAction!) -> Void in
-            let alertMessage = UIAlertController(title: "Service Unavailable", message: "Sorry, the call feature is not available yet. Please retry later.", preferredStyle: .alert)
-            alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alertMessage, animated: true, completion: nil)
-        }
-        let callAction = UIAlertAction(title: "Call "+"123-000-\(indexPath.row)", style: .default, handler: callActionHandler)
-        optionMenu.addAction(callAction)
-
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        optionMenu.addAction(cancelAction)
-        
-        if let popoverController = optionMenu.popoverPresentationController {
-            if let cell = tableView.cellForRow(at: indexPath) {
-                popoverController.sourceView = cell
-                popoverController.sourceRect = cell.bounds
-            }
-        }
-
-        //呈現選單
-        present(optionMenu, animated: true , completion: nil)
-        
-        //取消列的選取
-        tableView.deselectRow(at: indexPath, animated: false)
-    }
-*/
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive , title: "Delete"){ (action, sourceView, completionHandler) in
             //從資料來源來刪除列
@@ -157,17 +113,10 @@ class RestaurantTableViewController: UITableViewController {
         
         let checkAction = UIContextualAction(style: .normal, title: "Check") {
             (action, sourceView, completionHandler) in
-            
-            //let activityController : UIActivityViewController
-            
             let cell =  tableView.cellForRow(at: indexPath) as! RestaurantTableViewCell
             self.restaurantVisited[indexPath.row] = (self.restaurantVisited[indexPath.row]) ? false : true
             cell.checkImageView.isHidden = self.restaurantVisited[indexPath.row] ? false :true
             
-            //activityController = UIActivityViewController(activityItems: nil, applicationActivities: nil)
-            
-        
-            //self.present(activityController, animated: true, completion: nil)
             completionHandler(true)
             
         }
@@ -178,43 +127,6 @@ class RestaurantTableViewController: UITableViewController {
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [checkAction])
         return swipeConfiguration
     }
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
