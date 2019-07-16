@@ -10,10 +10,12 @@ import UIKit
 
 class RestaurantDetailViewController: UIViewController {
     
-    @IBOutlet var restaurantImageView: UIImageView!
-    @IBOutlet var restaurantNameLabel: UILabel!
-    @IBOutlet var restaurantTypeLabel: UILabel!
-    @IBOutlet var restaurantLocationLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var headerView: RestaurantDetailHeaderView!
+    //@IBOutlet var restaurantImageView: UIImageView!
+    //@IBOutlet var restaurantNameLabel: UILabel!
+    //@IBOutlet var restaurantTypeLabel: UILabel!
+    //@IBOutlet var restaurantLocationLabel: UILabel!
 
     var restaurant_d: Restaurant = Restaurant()
     
@@ -22,10 +24,15 @@ class RestaurantDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        restaurantImageView.image = UIImage(named: restaurant_d.image)
-        restaurantNameLabel.text = restaurant_d.name
-        restaurantTypeLabel.text = restaurant_d.type
-        restaurantLocationLabel.text = restaurant_d.location
+        headerView.nameLabel.text = restaurant_d.name
+        headerView.typeLabel.text = restaurant_d.type
+        headerView.headerImageView.image = UIImage(named: restaurant_d.image)
+        headerView.heartImageView.isHidden = (restaurant_d.isVisited) ? false : true
+        
+        //restaurantImageView.image = UIImage(named: restaurant_d.image)
+        //restaurantNameLabel.text = restaurant_d.name
+        //restaurantTypeLabel.text = restaurant_d.type
+        //restaurantLocationLabel.text = restaurant_d.location
         
         navigationItem.largeTitleDisplayMode = .never
         // Do any additional setup after loading the view.
