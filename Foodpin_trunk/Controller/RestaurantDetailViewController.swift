@@ -29,6 +29,14 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         headerView.typeLabel.text = restaurant_d.type
         headerView.headerImageView.image = UIImage(named: restaurant_d.image)
         headerView.heartImageView.isHidden = (restaurant_d.isVisited) ? false : true
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.tintColor = .white
+        
+        navigationController?.hidesBarsOnSwipe = false
+        
+        tableView.contentInsetAdjustmentBehavior = .never
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -65,7 +73,15 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
             fatalError("Failed to instantiate the table view cell for detail view controller")
         }
     }
-
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.hidesBarsOnSwipe = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
 }
