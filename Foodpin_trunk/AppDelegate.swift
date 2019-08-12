@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  Foodpin_trunk
+//  FoodPin
 //
-//  Created by Aman on 2019/6/26.
-//  Copyright © 2019 Aman. All rights reserved.
+//  Created by Simon Ng on 8/8/2018.
+//  Copyright © 2018 AppCoda. All rights reserved.
 //
 
 import UIKit
@@ -15,10 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-       
-        let backButtonImage = UIImage(named: "back")
-        UINavigationBar.appearance().backIndicatorImage = backButtonImage
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+        // Override point for customization after application launch.
         return true
     }
 

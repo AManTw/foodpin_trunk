@@ -1,9 +1,9 @@
 //
 //  RestaurantDetailViewController.swift
-//  Foodpin_trunk
+//  FoodPin
 //
-//  Created by Aman on 2019/7/5.
-//  Copyright © 2019 Aman. All rights reserved.
+//  Created by Simon Ng on 13/8/2018.
+//  Copyright © 2018 AppCoda. All rights reserved.
 //
 
 import UIKit
@@ -12,33 +12,30 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
-    var restaurant_d: Restaurant = Restaurant()
+    
+    var restaurant = Restaurant()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.largeTitleDisplayMode = .never
         
-        // Configure the table view
+        // Configure header view
+        headerView.nameLabel.text = restaurant.name
+        headerView.typeLabel.text = restaurant.type
+        headerView.headerImageView.image = UIImage(named: restaurant.image)
+        headerView.heartImageView.isHidden = (restaurant.isVisited) ? false : true
+        
+        // Set the table view's delegate and data source
         tableView.delegate = self
         tableView.dataSource = self
+        
+        // Configure the table view's style
         tableView.separatorStyle = .none
-        
-        // Configure header view
-        headerView.nameLabel.text = restaurant_d.name
-        headerView.typeLabel.text = restaurant_d.type
-        headerView.headerImageView.image = UIImage(named: restaurant_d.image)
-        headerView.heartImageView.isHidden = (restaurant_d.isVisited) ? false : true
-        
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.tintColor = .white
-        
-        navigationController?.hidesBarsOnSwipe = false
-        
-        tableView.contentInsetAdjustmentBehavior = .never
     }
     
+    // MARK: - UITableViewDataSource methods
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -54,34 +51,27 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
             cell.iconImageView.image = UIImage(named: "phone")
-            cell.shortTextLabel.text = restaurant_d.phone
+            cell.shortTextLabel.text = restaurant.phone
+            cell.selectionStyle = .none
             
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailIconTextCell.self), for: indexPath) as! RestaurantDetailIconTextCell
             cell.iconImageView.image = UIImage(named: "map")
-            cell.shortTextLabel.text = restaurant_d.location
+            cell.shortTextLabel.text = restaurant.location
+            cell.selectionStyle = .none
             
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailTextCell.self), for: indexPath) as! RestaurantDetailTextCell
-            cell.descriptionLabel.text = restaurant_d.description
+            cell.descriptionLabel.text = restaurant.description
+            cell.selectionStyle = .none
             
             return cell
             
         default:
             fatalError("Failed to instantiate the table view cell for detail view controller")
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.hidesBarsOnSwipe = false
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
 
 }

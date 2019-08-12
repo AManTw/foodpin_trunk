@@ -1,10 +1,3 @@
-//
-//  RestaurantDetailHeaderView.swift
-//  Foodpin_trunk
-//
-//  Created by Aman on 2019/7/16.
-//  Copyright © 2019 Aman. All rights reserved.
-//
 
 import UIKit
 
@@ -28,5 +21,4 @@ class RestaurantDetailHeaderView: UIView {
             heartImageView.tintColor = .white
         }
     }
-    
 }

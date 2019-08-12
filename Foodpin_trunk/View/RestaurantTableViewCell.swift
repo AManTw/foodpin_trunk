@@ -1,10 +1,3 @@
-//
-//  RestaurantTableViewCell.swift
-//  Foodpin_trunk
-//
-//  Created by Aman on 2019/6/26.
-//  Copyright © 2019 Aman. All rights reserved.
-//
 
 import UIKit
 
@@ -19,7 +12,7 @@ class RestaurantTableViewCell: UITableViewCell {
             thumbnailImageView.clipsToBounds = true
         }
     }
-    @IBOutlet var checkImageView: UIImageView!
+    @IBOutlet var heartImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
